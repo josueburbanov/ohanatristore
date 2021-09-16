@@ -1,9 +1,12 @@
 import logo from './ohana_noiso.svg';
 import './App.css';
+import NuevoComponente from './NuevoComponente';
+import NavBar from './NavBar';
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <NavBar></NavBar>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <br></br>
