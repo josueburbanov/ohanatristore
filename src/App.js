@@ -2,22 +2,16 @@ import logo from './ohana_noiso.svg';
 import './App.css';
 import NuevoComponente from './NuevoComponente';
 import NavBar from './NavBar';
+import ItemListContainer from './ItemListContainer';
 
 function App() {
   return (
-    <div>
+    <div className="App-container">
       <NavBar></NavBar>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <p className="App-button">
-          Próximamente!
-        </p>
-      </header>
+      <header className="App-header"></header>
+      <body className="App-body">
+        <ItemListContainer grettingUp="Tienda en" grettingDown="construcción"></ItemListContainer>
+      </body>
     </div>
   );
 }
