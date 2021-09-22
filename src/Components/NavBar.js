@@ -1,8 +1,8 @@
 import React from "react";
-import logo from './ohana_noiso.svg';
+import logo from '../ohana_noiso.svg';
 import CartWidget from './CartWidget';
 
-const NavBar = () => {
+const NavBar = ({itemsBagNav}) => {
     return (<nav class="flex items-center justify-between flex-wrap p-6 bg-transparent">
         <img src={logo} class="h-12 w-24 lg:h-8 lg:w-20 ml-3 flex-shrink-0 mr-6" alt="logo" />
         <div class="block lg:hidden">
@@ -26,7 +26,7 @@ const NavBar = () => {
                 <a href="#" class="inline-block text-sm ml-4 px-4 py-2 leading-none border rounded text-black font-semibold border-black hover:border-transparent hover:text-yellow-500 hover:bg-black mt-4 lg:mt-0">Login</a>
             </div>
             <div>
-                <CartWidget contador= "1" class="hidden lg:flex lg:text-sm lg:ml-4 lg:px-4 lg:py-2"></CartWidget>
+                <CartWidget contador= {itemsBagNav} class="hidden lg:flex lg:text-sm lg:ml-4 lg:px-4 lg:py-2"></CartWidget>
             </div>
         </div>
     </nav>);
