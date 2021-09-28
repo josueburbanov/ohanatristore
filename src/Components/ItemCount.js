@@ -1,28 +1,12 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 
 const ItemCount = (props) => {
     const [contadorItems, setContadorItems] = useState(1);
 
     return (
-        <div class="grid grid-rows-6 grid-flow-col ml-5 mr-5 ">
-            <div class="row-span-3 bg-gray">
-                <img src={props.source} alt={props.alt} class="object-contain h-full w-full" />
-            </div>
-            <div class="pl-3 bg-gray-300" >
-                <div class="flex">
-                    <div class="flex-grow text-base font-bold">
-                        {props.nombre}
-                    </div>
-                    <div class="block text-base font-bold justify-self-end">
-                        ({props.stock})
-                    </div>
-                </div>
-
-                <p>
-                    {props.descripcion}
-                </p>
-            </div>
-            <div class="flex justify-center mt-1 mb-1">
+        //<div class="grid grid-rows-6 grid-flow-col ml-5 mr-5 ">
+        <>
+            <div class="flex justify-center mt-3 mb-3">
                 <div class="grid grid-columns-6 grid-flow-col w-full items-center text-center border rounded text-sm text-black font-semibold border-black">
                     <div >
                         <button class="font-bold"
@@ -52,12 +36,12 @@ const ItemCount = (props) => {
                         if (contadorItems > (props.stock - contadorItems)) {
                             setContadorItems(props.stock - contadorItems)
                         }
-
                     }}>
                     Agregar item al carrito
                 </button>
             </div>
-        </div>
+        </>
+        //</div>
     )
 }
 export default ItemCount;

@@ -1,0 +1,27 @@
+[
+    {
+        "id": "H002_RJS001",
+        "title": "Portadorsal running",
+        "description": "Cinturón para llevar el dorsal + agujeros para llevar geles",
+        "price": "14.00",
+        "stock": 8,
+        "pictureUrl": "https://i.ibb.co/bPrPZQG/61-GVWrhy-Gs-L-AC-SL1000.jpg"
+    },
+    {
+        "id":"H010_OHN001",
+        "title": "Camiseta Running",
+        "description": "Camiseta transpirable para correr ligero y ventilado",
+        "price": "14.00",
+        "stock": 5,
+        "pictureUrl": "https://i.ibb.co/xzjywmp/camiseta-run.png",
+        "tallas": [
+            "S",
+            "M",
+            "XL"
+        ],
+        "colores": [
+            "azul",
+            "blanca"
+        ]
+    }
+]

@@ -1,8 +1,18 @@
-import {React, useState} from "react";
-import ItemCount from "./ItemCount"
+import { React, useState } from "react";
+
+import ItemList from "./ItemList"
+import data from "../data_tienda_tri.json"
 
 const ItemListContainer = (props) => {
     const [stock, setStock] = useState(10);
+    const [renderedOutput, setRenderedOutput] = useState([]);
+    const promesa = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(data)
+        }, 2000);
+    });
+    
+
     return (
         <div>
             <div class="flex items-center justify-center mb-10 mt-10">
@@ -16,19 +26,7 @@ const ItemListContainer = (props) => {
                 </svg>
             </div>
             <div class="grid grid-cols-3 items-center justify-center mb-10 mt-10 border-4 border-black">
-                <div class="mb-4 bg-gray-300 rounded"><ItemCount stock={stock} nombre="Camiseta Running" descripcion="100% Tela transpirable"
-                    onAdd={(counter) => {
-                        props.setItemsBagList(props.itemsBagList + counter);
-                        setStock(stock - counter);
-                    }}></ItemCount></div>
-                <div class="text-center font-bold text-4xl mt-20 mb-20" >Item 2</div>
-                <div class="text-center font-bold text-4xl mt-20 mb-20">Item 3</div>
-                <div class="text-center font-bold text-4xl mt-20 mb-20">Item 4</div>
-                <div class="text-center font-bold text-4xl mt-20 mb-20">Item 5</div>
-                <div class="text-center font-bold text-4xl mt-20 mb-20">Item 6</div>
-                <div class="text-center font-bold text-4xl mt-20 mb-20">Item 7</div>
-                <div class="text-center font-bold text-4xl mt-20 mb-20">Item 8</div>
-                <div class="text-center font-bold text-4xl mt-20 mb-20">Item 9</div>
+                <ItemList setRenderedOutput={setRenderedOutput} renderedOutput={renderedOutput} promesa={promesa}></ItemList>
             </div>
         </div>
     );
