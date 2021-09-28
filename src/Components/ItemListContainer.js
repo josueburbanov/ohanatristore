@@ -4,7 +4,6 @@ import ItemList from "./ItemList"
 import data from "../data_tienda_tri.json"
 
 const ItemListContainer = (props) => {
-    const [stock, setStock] = useState(10);
     const [renderedOutput, setRenderedOutput] = useState([]);
     const promesa = new Promise((resolve, reject) => {
         setTimeout(() => {
