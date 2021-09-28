@@ -1,14 +1,18 @@
-import React from "react";
+import { React, useState } from "react";
 import Item from "./Item";
 import ItemCount from "./ItemCount";
 
 const ItemList = (props) => {
     props.promesa.then(response => {
-        props.setRenderedOutput(response.map(element =>
-            <div class="mb-4 bg-gray-300 rounded">
+        props.setRenderedOutput(response.map(element => {
+            return <div class="mb-4 bg-gray-300 rounded">
                 <Item stock={element.stock} title={element.title} descripcion={element.description}
-                source = {element.pictureUrl}></Item>
+                    source={element.pictureUrl}
+                    onAdd={(counter) => {
+                        props.setItemsBagList(props.itemsBagList + counter);
+                    }}></Item>
             </div>
+        }
         )
         )
     }).catch(error => {

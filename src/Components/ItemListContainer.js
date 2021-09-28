@@ -26,7 +26,8 @@ const ItemListContainer = (props) => {
                 </svg>
             </div>
             <div class="grid grid-cols-3 items-center justify-center mb-10 mt-10 border-4 border-black">
-                <ItemList setRenderedOutput={setRenderedOutput} renderedOutput={renderedOutput} promesa={promesa}></ItemList>
+                <ItemList setRenderedOutput={setRenderedOutput} renderedOutput={renderedOutput} promesa={promesa}
+                itemsBagList={props.itemsBagList} setItemsBagList={props.setItemsBagList}></ItemList>
             </div>
         </div>
     );
