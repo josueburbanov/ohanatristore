@@ -24,7 +24,7 @@ const ItemCount = (props) => {
     }
     return (
         <>
-            <div class="flex justify-center mt-3 mb-3">
+            <div class="flex justify-center mb-1 py-2">
                 <div class="grid grid-columns-6 grid-flow-col w-full items-center text-center border rounded text-sm text-black font-semibold border-black">
                     <div >
                         <button class="font-bold"
@@ -40,7 +40,7 @@ const ItemCount = (props) => {
                 </div>
             </div>
             <div class="mt-2">
-                <button class="w-full text-sm px-4 py-2 leading-none border rounded text-gray-100 font-semibold border-black hover:border-black hover:text-black hover:bg-transparent bg-black mt-4 mb-4 lg:mt-0"
+                <button class="w-full text-sm px-4 py-2 leading-none border rounded text-gray-100 font-semibold border-black hover:border-black hover:text-black hover:bg-transparent bg-black lg:mt-0"
                     onClick={() => addItemToBag()}>
                     Agregar item al carrito
                 </button>

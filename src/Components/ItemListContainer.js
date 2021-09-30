@@ -1,16 +1,29 @@
-import { React, useState } from "react";
-
+import { React, useEffect, useState } from "react";
 import ItemList from "./ItemList"
 import data from "../data_tienda_tri.json"
 
 const ItemListContainer = (props) => {
-    const [renderedOutput, setRenderedOutput] = useState([]);
-    const promesa = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(data)
-        }, 2000);
-    });
-    
+    const [dataFetched, setDataFetched] = useState([]);
+    // const promesa = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve(data)
+    //     }, 2000);
+    // });
+
+    // //Resuelvo promesa
+    // promesa.then(response => {
+    //     setDataFetched(response);
+    // }).catch(error => {
+    //     console.error('Error en fetch: ', error);
+    // })
+    useEffect(() => {
+        fetch('https://retoolapi.dev/fvE4Ak/data')
+        .then(response => response.json())
+        .then(data => setDataFetched(data))
+        .catch(error => {
+            console.error('Error en fetch: ', error);
+        })
+    }, [])
 
     return (
         <div>
@@ -24,9 +37,8 @@ const ItemListContainer = (props) => {
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
                 </svg>
             </div>
-            <div class="grid grid-cols-3 items-center justify-center mb-10 mt-10 border-4 border-black">
-                <ItemList setRenderedOutput={setRenderedOutput} renderedOutput={renderedOutput} promesa={promesa}
-                itemsBagList={props.itemsBagList} setItemsBagList={props.setItemsBagList}></ItemList>
+            <div class="grid grid-cols-3 items-center justify-center mb-10 mt-10">
+                <ItemList dataFetched={dataFetched} itemsBagList={props.itemsBagList} setItemsBagList={props.setItemsBagList}></ItemList>
             </div>
         </div>
     );
