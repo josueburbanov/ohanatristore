@@ -1,22 +1,24 @@
 import { React, useState, useEffect } from "react";
 import ItemDetail from "./ItemDetail";
-import data from "../data_tienda_tri.json"
+import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from 'react-router-dom';
 
-const ItemDetailContainer = (props) => {
+const ItemDetailContainer = () => {
     const [itemFetched, setItemFetched] = useState({});
+    let params = useParams();
+    
 
     const getItem = () => {
-        fetch(`https://retoolapi.dev/fvE4Ak/data/${props.id}`)
-        .then(response => response.json())
-        .then(data => {setItemFetched(data);console.log(itemFetched)})
-        .catch(error => {
-            console.error('Error en fetch: ', error);
-        })
+        fetch(`https://retoolapi.dev/63WBBZ/data/${params.id}`)
+            .then(response => response.json())
+            .then(data => setItemFetched(data))
+            .catch(error => {
+                console.error('Error en fetch: ', error);
+            })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getItem();
-    },[])
+    }, [params.id])
 
     return (
         <>

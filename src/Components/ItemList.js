@@ -10,8 +10,8 @@ const ItemList = (props) => {
     useEffect(() => {
         setRenderedOutput(props.dataFetched.map(element => {
             return <div class="mb-4 bg-transparent rounded text-center">
-                <Item stock={element.stock} title={element.title} price={element.price}
-                    source={element.pictureUrl}
+                <Item stock={element.stock} title={element.title} price={element.price} identificador={element.id}
+                    source={element.pictureUrl }
                     onAdd={(counter) => addItemsToBagList(counter)}></Item>
             </div>
         }))
