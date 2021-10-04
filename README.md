@@ -23,4 +23,8 @@ la cantidad de artículos a comprar y el stock (solo visualmente nada de POST o 
 Se utiliza una api para simular la base de datos. https://retoolapi.dev/63WBBZ/data/
 
 La lógica general es traer los datos (fecth) en los contenedores de cada componente y repartirlos según la necesidad de la vista.
+
+![entrega_intermedia1](https://user-images.githubusercontent.com/32949277/135891445-d6ab2c3e-07cd-4c2b-a997-a4e81c5ec458.gif)
+
+
 Realizado por: Josue Burbano
