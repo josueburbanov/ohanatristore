@@ -7,21 +7,16 @@ const ItemList = (props) => {
     const addItemsToBagList = (counter) => {
         props.setItemsBagList(props.itemsBagList + counter);
     }
-    useEffect(() => {
-        setRenderedOutput(props.dataFetched.map(element => {
-            return <div class="mb-4 bg-transparent rounded text-center">
-                <Item stock={element.stock} title={element.title} price={element.price} identificador={element.id}
-                    source={element.pictureUrl }
-                    onAdd={(counter) => addItemsToBagList(counter)}></Item>
-            </div>
-        }))
-    }
-        , [props.dataFetched])
 
-    
     return (
         <>
-            {renderedOutput}
+            {props.dataFetched.map(element => {
+                return <div class="mb-4 bg-transparent rounded text-center">
+                    <Item stock={element.stock} title={element.title} price={element.price} identificador={element.id}
+                        source={element.pictureUrl}
+                        onAdd={(counter) => addItemsToBagList(counter)}></Item>
+                </div>
+            })}
         </>
     )
 }
