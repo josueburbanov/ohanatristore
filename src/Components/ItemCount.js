@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const ItemCount = (props) => {
     const [contadorItems, setContadorItems] = useState(1);
+    const [itemAgregado, setItemAgregado] = useState(false);
 
     const addItemToBag = () => {
         props.onAdd(contadorItems);
@@ -9,6 +11,7 @@ const ItemCount = (props) => {
         if (contadorItems > (props.stock - contadorItems)) {
             setContadorItems(props.stock - contadorItems)
         }
+        setItemAgregado(true);
     }
 
     const checkContadorNeg = () => {
@@ -25,25 +28,32 @@ const ItemCount = (props) => {
     return (
         <>
             <div class="flex justify-center mb-4">
-                <div class="grid grid-columns-6 grid-flow-col w-full items-center text-center border rounded text-sm text-black font-semibold border-black">
-                    <div >
-                        <button class="font-bold"
-                            onClick={() => checkContadorOver()}>+</button>
+                {itemAgregado ? <></> :
+                    <div class="grid grid-columns-6 grid-flow-col w-full items-center text-center border rounded text-sm text-black font-semibold border-black">
+                        <div >
+                            <button class="font-bold"
+                                onClick={() => checkContadorOver()}>+</button>
+                        </div>
+                        <div class="col-span-2 text-base">
+                            {contadorItems}
+                        </div>
+                        <div>
+                            <button class="font-bold"
+                                onClick={() => checkContadorNeg()}>-</button>
+                        </div>
+
                     </div>
-                    <div class="col-span-2 text-base">
-                        {contadorItems}
-                    </div>
-                    <div>
-                        <button class="font-bold"
-                            onClick={() => checkContadorNeg()}>-</button>
-                    </div>
-                </div>
+                }
             </div>
             <div>
+
                 <button class="w-full text-sm px-4 py-2 leading-none border rounded text-gray-100 font-semibold border-black hover:border-black hover:text-black hover:bg-transparent bg-black lg:mt-0"
                     onClick={() => addItemToBag()}>
-                    Agregar item al carrito
+                    {itemAgregado ? <Link to={`/cart`}>Proceder al pago</Link> :
+                        <p>Agregar item al carrito</p>
+                    }
                 </button>
+
             </div>
         </>
     )

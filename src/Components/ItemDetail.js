@@ -1,5 +1,12 @@
+import ItemCount from "./ItemCount"
+import { React, useState, useEffect } from "react";
+
 
 const ItemDetail = (props) => {
+    const [stock, setStock] = useState();
+    useEffect(() => {
+        setStock(props.itemFetched.stock)
+    }, [props.itemFetched.stock])
     return (
         <div className="grid grid-cols-2 items-center">
             <div className="flex">
@@ -9,9 +16,17 @@ const ItemDetail = (props) => {
                 <div className="h-36">
                     <div className="text-2xl font-bold">{props.itemFetched.title}</div>
                     <div>${props.itemFetched.price}</div>
-                    <div>Stock ({props.itemFetched.stock})</div>
+                    {stock === 0 ? <div className="italic">Este artículo no está disponible </div> :
+                    <div className="italic">Tenemos ({stock}) artículos en stock </div>
+                }
+                    
                 </div>
-                <div>{props.itemFetched.description}</div>
+                <div >{props.itemFetched.description}</div>
+                {stock === 0 ? <></> :
+                    <div className="my-5 py-5">
+                        <ItemCount stock={stock} onAdd={props.onAdd} setStock={setStock}></ItemCount>
+                    </div>
+                }
             </div>
         </div>
     )

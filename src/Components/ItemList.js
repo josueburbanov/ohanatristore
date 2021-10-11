@@ -3,7 +3,6 @@ import Item from "./Item";
 import ItemCount from "./ItemCount";
 
 const ItemList = (props) => {
-    const [renderedOutput, setRenderedOutput] = useState([]);
     const addItemsToBagList = (counter) => {
         props.setItemsBagList(props.itemsBagList + counter);
     }
