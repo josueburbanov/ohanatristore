@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import ItemList from "./ItemList"
-import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const ItemListContainer = (props) => {
     let params = useParams();
@@ -32,7 +32,7 @@ const ItemListContainer = (props) => {
                     </svg>
                 </div> : <div></div>}
             <div class="grid grid-cols-3 items-center justify-center mb-10 mt-10">
-                <ItemList dataFetched={dataFetched} itemsBagList={props.itemsBagList} setItemsBagList={props.setItemsBagList}></ItemList>
+                <ItemList dataFetched={dataFetched}></ItemList>
             </div>
         </div>
     );

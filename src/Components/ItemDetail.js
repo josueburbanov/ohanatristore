@@ -3,10 +3,12 @@ import { React, useState, useEffect } from "react";
 
 
 const ItemDetail = (props) => {
-    const [stock, setStock] = useState();
+    const [stock, setStock] = useState(props.itemFetched.stock);
+
     useEffect(() => {
         setStock(props.itemFetched.stock)
     }, [props.itemFetched.stock])
+
     return (
         <div className="grid grid-cols-2 items-center">
             <div className="flex">
@@ -24,7 +26,7 @@ const ItemDetail = (props) => {
                 <div >{props.itemFetched.description}</div>
                 {stock === 0 ? <></> :
                     <div className="my-5 py-5">
-                        <ItemCount stock={stock} onAdd={props.onAdd} setStock={setStock}></ItemCount>
+                        <ItemCount item={props.itemFetched} stock={stock} onAdd={props.onAdd} setStock={setStock}></ItemCount>
                     </div>
                 }
             </div>

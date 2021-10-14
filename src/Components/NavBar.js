@@ -4,7 +4,7 @@ import ItemListContainer from "./ItemListContainer";
 import logo from '../ohana_noiso.svg'
 import CartWidget from './CartWidget'
 
-const NavBar = ({ itemsBagNav }) => {
+const NavBar = () => {
     return (
         <nav class="flex items-center justify-between flex-wrap p-6 bg-transparent">
             <Link to="/">
@@ -32,7 +32,7 @@ const NavBar = ({ itemsBagNav }) => {
                     <a href="#" class="inline-block text-sm ml-4 px-4 py-2 leading-none border rounded text-black font-semibold border-black hover:border-transparent hover:text-yellow-500 hover:bg-black mt-4 lg:mt-0">Login</a>
                 </div>
                 <div>
-                    <CartWidget contador={itemsBagNav} class="hidden lg:flex lg:text-sm lg:ml-4 lg:px-4 lg:py-2"></CartWidget>
+                    <CartWidget class="hidden lg:flex lg:text-sm lg:ml-4 lg:px-4 lg:py-2"></CartWidget>
                 </div>
             </div>
 

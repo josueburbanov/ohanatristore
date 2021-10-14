@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 const ItemCount = (props) => {
     const [contadorItems, setContadorItems] = useState(1);
     const [itemAgregado, setItemAgregado] = useState(false);
 
+    useEffect(() => {
+        setItemAgregado(false)
+    }, [props.item.id])
+
     const addItemToBag = () => {
-        props.onAdd(contadorItems);
+        props.onAdd(contadorItems, props.item);
         props.setStock(props.stock - contadorItems);
         if (contadorItems > (props.stock - contadorItems)) {
             setContadorItems(props.stock - contadorItems)
@@ -46,13 +51,21 @@ const ItemCount = (props) => {
                 }
             </div>
             <div>
-
-                <button class="w-full text-sm px-4 py-2 leading-none border rounded text-gray-100 font-semibold border-black hover:border-black hover:text-black hover:bg-transparent bg-black lg:mt-0"
-                    onClick={() => addItemToBag()}>
-                    {itemAgregado ? <Link to={`/cart`}>Proceder al pago</Link> :
+                {itemAgregado ?
+                    <>
+                        <button class="w-full text-sm px-4 py-2 leading-none border rounded text-gray-100 font-semibold border-black hover:border-black hover:text-black hover:bg-transparent bg-black lg:mt-0">
+                            <Link to={`/cart`}>Proceder al pago</Link>
+                        </button>
+                        <button class="w-full text-sm px-4 py-2 leading-none border rounded text-gray-100 font-semibold border-black hover:border-black hover:text-black hover:bg-transparent bg-transparent lg:mt-2">
+                            <Link to={`/`}>Seguir Comprando</Link>
+                        </button>
+                    </> :
+                    <button class="w-full text-sm px-4 py-2 leading-none border rounded text-gray-100 font-semibold border-black hover:border-black hover:text-black hover:bg-transparent bg-black lg:mt-0"
+                        onClick={() => addItemToBag()}>
                         <p>Agregar item al carrito</p>
-                    }
-                </button>
+                    </button>
+                }
+
 
             </div>
         </>

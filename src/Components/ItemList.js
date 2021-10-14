@@ -1,19 +1,19 @@
-import { React, useState, useEffect } from "react";
+import { React, useContext } from "react";
+import {ContextCart} from "./CartContext";
 import Item from "./Item";
-import ItemCount from "./ItemCount";
 
 const ItemList = (props) => {
-    const addItemsToBagList = (counter) => {
-        props.setItemsBagList(props.itemsBagList + counter);
+    const contexto = useContext(ContextCart);
+    const addItemsToBagList = (counter, item) => {
+        contexto.addItems(item, counter);
     }
 
     return (
         <>
             {props.dataFetched.map(element => {
                 return <div class="mb-4 bg-transparent rounded text-center">
-                    <Item stock={element.stock} title={element.title} price={element.price} identificador={element.id}
-                        source={element.pictureUrl}
-                        onAdd={(counter) => addItemsToBagList(counter)}></Item>
+                    <Item item={element} visible={false}
+                        onAdd={(counter, item) => addItemsToBagList(counter, item)}></Item>
                 </div>
             })}
         </>

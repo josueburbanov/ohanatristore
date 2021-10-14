@@ -3,25 +3,26 @@ import ItemDetailContainer from './ItemDetailContainer';
 import NavBar from './NavBar';
 import ItemListContainer from './ItemListContainer';
 import { React, useState } from "react";
+import Cart from './Cart';
 
-const RouterApp = () => {
-    const [itemsBag, setItemsBag] = useState(0);
+const RouterApp = ({itemsBag, setItemsBag}) => {
+    
     return (
         <div>
             <Router>
-                <NavBar itemsBagNav={itemsBag}></NavBar>
+                <NavBar></NavBar>
                 <Switch className="App-body mx-32">
                     <Route exact path='/'>
-                        <ItemListContainer grettingUp="Tienda en" grettingDown="construcción" banner="true" itemsBagList={itemsBag} setItemsBagList={setItemsBag}></ItemListContainer>
+                        <ItemListContainer grettingUp="Tienda en" grettingDown="construcción" banner="true"></ItemListContainer>
                     </Route>
                     <Route path='/item/:id'>
-                        <ItemDetailContainer itemsBagList={itemsBag} setItemsBagList={setItemsBag}></ItemDetailContainer>
+                        <ItemDetailContainer></ItemDetailContainer>
                     </Route>
                     <Route exact path='/category/:categoryId'>
-                        <ItemListContainer banner={false} itemsBagList={itemsBag} setItemsBagList={setItemsBag}></ItemListContainer>
+                        <ItemListContainer banner={false}></ItemListContainer>
                     </Route>
                     <Route exact path='/cart'>
-                        <ItemListContainer grettingUp="Cart" grettingDown="próximamente" banner="true" itemsBagList={itemsBag} setItemsBagList={setItemsBag}></ItemListContainer>
+                        <Cart></Cart>
                     </Route>
                 </Switch>
             </Router>

@@ -1,10 +1,13 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import ItemDetail from "./ItemDetail";
 import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from 'react-router-dom';
+import { ContextCart } from "./CartContext";
 
-const ItemDetailContainer = (props) => {
+const ItemDetailContainer = () => {
     const [itemFetched, setItemFetched] = useState({});
     let params = useParams();
+    const contexto = useContext(ContextCart);
+
 
     const getItem = () => {
         fetch(`https://retoolapi.dev/63WBBZ/data/${params.id}`)
@@ -15,8 +18,8 @@ const ItemDetailContainer = (props) => {
             })
     }
 
-    const addItemsToBagList = (counter) => {
-        props.setItemsBagList(props.itemsBagList + counter);
+    const addItemsToBagList = (counter, item) => {
+        contexto.addItems(item, counter);
     }
 
     useEffect(() => {
@@ -25,7 +28,7 @@ const ItemDetailContainer = (props) => {
 
     return (
         <>
-            <ItemDetail itemFetched={itemFetched} onAdd={(counter) => addItemsToBagList(counter)} ></ItemDetail>
+            <ItemDetail itemFetched={itemFetched} onAdd={(counter, item) => addItemsToBagList(counter, item)} ></ItemDetail>
         </>
     )
 }
