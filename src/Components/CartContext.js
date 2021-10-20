@@ -17,8 +17,7 @@ const CartContext = ({ children }) => {
         const itemDuplicado = isInCart(item.id)
         if (!itemDuplicado) {
             item["quantity"] = cantidad;
-            setItemBags( itemsBag => [...itemsBag, item]);
-
+            setItemBags(itemsBag => [...itemsBag, item]);
         }
         else {
             itemDuplicado.quantity += cantidad;
@@ -26,9 +25,18 @@ const CartContext = ({ children }) => {
         }
     }
 
-    const removeItem = (index) => {
-        let removeIndex = itemsBag.map(item => item.id).indexOf(index);
+    const removeItem = (id) => {
+        let removeIndex = itemsBag.map(item => item.id).indexOf(id);
         ~removeIndex && itemsBag.splice(removeIndex, 1);
+        setItemBags([...itemsBag])
+    }
+
+    const updateItem = (id, item) => {
+        let updateIndex = itemsBag.map(item => item.id).indexOf(id);
+        if (~updateIndex) {
+            itemsBag[updateIndex] = item;
+            setItemBags([...itemsBag])
+        }
     }
 
     const clearItems = () => {
@@ -40,15 +48,15 @@ const CartContext = ({ children }) => {
     }
 
     const calcTotalItems = () => {
-        return itemsBag.length != 0 ? itemsBag.reduce((acum, cur) =>(acum + cur.quantity),0) : 0;
+        return itemsBag.length != 0 ? itemsBag.reduce((acum, cur) => (acum + cur.quantity), 0) : 0;
     }
 
     const calcTotalPrice = () => {
-        return itemsBag.length != 0 ? itemsBag.reduce((acum, cur) =>(acum + cur.price*cur.quantity),0) : 0;
+        return itemsBag.length != 0 ? itemsBag.reduce((acum, cur) => (acum + cur.price * cur.quantity), 0) : 0;
     }
 
     return (
-        <ContextCart.Provider value={{ itemsBag, addItems, removeItem, clearItems, totalItems, totalPrice }}>
+        <ContextCart.Provider value={{ itemsBag, addItems, removeItem, clearItems, totalItems, totalPrice, updateItem }}>
             {children}
         </ContextCart.Provider>
     )
