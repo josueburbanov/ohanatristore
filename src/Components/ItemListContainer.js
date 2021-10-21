@@ -1,22 +1,42 @@
 import { React, useEffect, useState } from "react";
 import ItemList from "./ItemList"
 import { useParams } from 'react-router-dom'
+import { getFirestore } from '../firebase';
 
 const ItemListContainer = (props) => {
     let params = useParams();
+    const [loading, setLoading] = useState(false);
     const [dataFetched, setDataFetched] = useState([]);
 
     useEffect(() => {
-        fetch("https://retoolapi.dev/63WBBZ/data?category=" + params.categoryId)
-            .then(response => response.json())
-            .then(data => {
-                setDataFetched(data)
-                console.log(data)
-            })
-            .catch(error => {
-                console.error('Error en fetch: ', error);
-            })
-    }, [params])
+        // fetch("https://retoolapi.dev/63WBBZ/data?category=" + params.categoryId)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         setDataFetched(data)
+        //         console.log(data)
+        //     })
+        //     .catch(error => {
+        //         console.error('Error en fetch: ', error);
+        //     })
+        setLoading(true);
+        const db = getFirestore();
+        const itemCollection = params.categoryId === undefined ? db.collection("items") : 
+        db.collection("items").where('category', '==', params.categoryId    );
+        itemCollection.get().then((querySnapshot) => {
+            if (querySnapshot.size === 0) {
+                console.log('No Hay resultados');
+            }
+            setDataFetched(querySnapshot.docs.map(doc => {
+                const id = doc.id;
+                return {id, ...doc.data()}
+            }) )
+        }).catch((error) => {
+            console.log("Error al traer los items", error);
+        }).finally(() => {
+            setLoading(false);
+        })
+    }, [params]);
+
 
     return (
         <div>
@@ -31,9 +51,10 @@ const ItemListContainer = (props) => {
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
                     </svg>
                 </div> : <div></div>}
+            {!loading ? 
             <div class="grid grid-cols-3 items-center justify-center mb-10 mt-10">
                 <ItemList dataFetched={dataFetched}></ItemList>
-            </div>
+            </div>: <div> Cargando...</div>}
         </div>
     );
 

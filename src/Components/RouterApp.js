@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ItemDetailContainer from './ItemDetailContainer';
 import NavBar from './NavBar';
 import ItemListContainer from './ItemListContainer';
-import { React, useState } from "react";
+import { React } from "react";
 import Cart from './Cart';
 
 const RouterApp = ({itemsBag, setItemsBag}) => {
