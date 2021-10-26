@@ -51,7 +51,7 @@ const ItemListContainer = (props) => {
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
                     </svg>
                 </div> : <div></div>}
-            {!loading ? 
+            {!loading || props.banner ? 
             <div class="grid grid-cols-3 items-center justify-center mb-10 mt-10">
                 <ItemList dataFetched={dataFetched}></ItemList>
             </div>: <div> Cargando...</div>}

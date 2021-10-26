@@ -34,7 +34,7 @@ const ItemDetailContainer = () => {
             if (querySnapshot.size === 0) {
                 console.log('No Hay resultados');
             }
-            setItemFetched(querySnapshot.data())
+            setItemFetched({...querySnapshot.data(), id: querySnapshot.id})
         }).catch((error) => {
             console.log("Error al traer los items", error);
         }).finally(() => {

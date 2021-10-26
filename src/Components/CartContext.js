@@ -11,12 +11,14 @@ const CartContext = ({ children }) => {
     useEffect(() => {
         setTotalItems(calcTotalItems())
         setTotalPrice(calcTotalPrice())
+        console.log(itemsBag)
     }, [itemsBag])
 
     const addItems = (item, cantidad) => {
         const itemDuplicado = isInCart(item.id)
         if (!itemDuplicado) {
             item["quantity"] = cantidad;
+            item["id"] = item.id;
             setItemBags(itemsBag => [...itemsBag, item]);
         }
         else {
@@ -43,8 +45,8 @@ const CartContext = ({ children }) => {
         setItemBags([])
     }
 
-    const isInCart = (index) => {
-        return itemsBag.find(item => item.id == index)
+    const isInCart = (id) => {
+        return itemsBag.find(item => item.id == id)
     }
 
     const calcTotalItems = () => {

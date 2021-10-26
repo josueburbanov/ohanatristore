@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import ItemListContainer from "./ItemListContainer";
 import logo from '../ohana_noiso.svg'
 import CartWidget from './CartWidget'
 
@@ -29,7 +28,7 @@ const NavBar = () => {
                     </Link>
                 </div>
                 <div>
-                    <a href="#" class="inline-block text-sm ml-4 px-4 py-2 leading-none border rounded text-black font-semibold border-black hover:border-transparent hover:text-yellow-500 hover:bg-black mt-4 lg:mt-0">Login</a>
+                    <a className="inline-block text-sm ml-4 px-4 py-2 leading-none border rounded text-black font-semibold border-black hover:border-transparent hover:text-yellow-500 hover:bg-black mt-4 lg:mt-0">Login</a>
                 </div>
                 <div>
                     <CartWidget class="hidden lg:flex lg:text-sm lg:ml-4 lg:px-4 lg:py-2"></CartWidget>
