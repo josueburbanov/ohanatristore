@@ -23,4 +23,7 @@ la cantidad de artículos a comprar y el stock. También está conectada la cana
 
 Se utiliza Firebase para controlar los detalles de cada ítem, el stock y registrar órdenes.
 
+![entrega_final](https://user-images.githubusercontent.com/32949277/139725142-74b739a1-f5cb-4a84-84bd-ebe22fdd149a.gif)
+
+
 Realizado por: Josue Burbano
