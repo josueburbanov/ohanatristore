@@ -11,7 +11,6 @@ const CartContext = ({ children }) => {
     useEffect(() => {
         setTotalItems(calcTotalItems())
         setTotalPrice(calcTotalPrice())
-        console.log(itemsBag)
     }, [itemsBag])
 
     const addItems = (item, cantidad) => {

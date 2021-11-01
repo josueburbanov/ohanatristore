@@ -13,13 +13,13 @@ const RouterApp = ({itemsBag, setItemsBag}) => {
                 <NavBar></NavBar>
                 <Switch className="App-body mx-32">
                     <Route exact path='/'>
-                        <ItemListContainer grettingUp="Tienda en" grettingDown="construcción" banner={true}></ItemListContainer>
+                        <ItemListContainer grettingUp="Bienvenido a" grettingDown="Ohana Tri Store" banner={true} enableContent={true}></ItemListContainer>
                     </Route>
                     <Route path='/item/:id'>
                         <ItemDetailContainer></ItemDetailContainer>
                     </Route>
                     <Route exact path='/category/:categoryId'>
-                        <ItemListContainer banner={false}></ItemListContainer>
+                        <ItemListContainer banner={false} enableContent={true}></ItemListContainer>
                     </Route>
                     <Route exact path='/cart'>
                         <Cart></Cart>

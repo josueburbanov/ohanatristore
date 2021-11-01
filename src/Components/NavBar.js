@@ -18,12 +18,27 @@ const NavBar = () => {
                 <div class="text-sm lg:flex-grow">
                     <Link to="/category/triatlon">
                         <a class="block mt-4 ml-4 lg:inline-block lg:mt-0 text-black font-semibold hover:text-white mr-4">
-                            Triatlon
+                            Triatlón
                         </a>
                     </Link>
                     <Link to="/category/ciclismo">
                         <a class="block mt-4 ml-4 lg:inline-block lg:mt-0 text-black font-semibold hover:text-white mr-4">
                             Ciclismo
+                        </a>
+                    </Link>
+                    <Link to="/category/running">
+                        <a class="block mt-4 ml-4 lg:inline-block lg:mt-0 text-black font-semibold hover:text-white mr-4">
+                            Running
+                        </a>
+                    </Link>
+                    <Link to="/category/natacion">
+                        <a class="block mt-4 ml-4 lg:inline-block lg:mt-0 text-black font-semibold hover:text-white mr-4">
+                            Natación
+                        </a>
+                    </Link>
+                    <Link to="/category/hiking">
+                        <a class="block mt-4 ml-4 lg:inline-block lg:mt-0 text-black font-semibold hover:text-white mr-4">
+                            Hiking
                         </a>
                     </Link>
                 </div>

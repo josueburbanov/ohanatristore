@@ -5,6 +5,7 @@ import { getFirestore } from '../firebase';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { useHistory } from "react-router-dom";
+import UserPayInfo from "./UserPayInfo";
 
 const Cart = () => {
     const contexto = useContext(ContextCart);
@@ -42,12 +43,7 @@ const Cart = () => {
         return buyerOrder;
     }
 
-    const handleProcessPayment = (e) => {
-        e.preventDefault();
-        setLoading(false);
-        const dataForm = new FormData(e.target);
-        updateItemsBought() ? insertPaymentDb(dataForm) : alert("Some items are out of stock")
-    }
+
 
     const insertPaymentDb = (dataForm) => {
         const db = getFirestore();
@@ -55,21 +51,20 @@ const Cart = () => {
         const newOrder = createOrder(dataForm.get('name'), dataForm.get('phone'),
             dataForm.get('email'));
         itemCollection.add(newOrder).then(response => {
-            console.log("Item agregado con exito")
+            console.log(response.id)
+            alert("Compra realizada, por favor guarde su número de compra: "+response.id)
             contexto.clearItems();
             history.push("/");
         }).catch(err => {
-            console.log("No se pudo agregar el item")
+            alert("No se pudo agregar el item")
         })
     }
 
     const updateItemsBought = async () => {
         const db = getFirestore();
-        console.log(contexto.itemsBag)
         const itemsToUpdate = db.collection("items").where(firebase.firestore.FieldPath.documentId(), 'in', contexto.itemsBag.map(i => i.id));
         const query = await itemsToUpdate.get();
         const batch = db.batch();
-
         const outOfStock = [];
         query.docs.forEach((docSnapshot, idx) => {
             if (docSnapshot.data().stock >= contexto.itemsBag[idx].quantity) {
@@ -83,7 +78,6 @@ const Cart = () => {
             return true
         } else {
             return false
-            console.log("There is item(s) out of stock" + outOfStock)
         }
 
     }
@@ -96,7 +90,7 @@ const Cart = () => {
                 </div> :
                 <div className="grid grid-cols-2 mx-32 ">
                     <div className="divide-y divide-fuchsia-300">
-                        {contexto.itemsBag.length === 0 ? <ItemListContainer grettingUp="No hay items" grettingDown="agregados" banner="false"></ItemListContainer> :
+                        {contexto.itemsBag.length === 0 ? <ItemListContainer grettingUp="No hay items" grettingDown="agregados" banner={true}></ItemListContainer> :
                             contexto.itemsBag.map(itemBag => {
                                 return (
                                     <div className="flex divide-y-8 ">
@@ -140,33 +134,7 @@ const Cart = () => {
 
                     </div>
                     {contexto.itemsBag.length === 0 ? <></> :
-                        <div className="text-right border rounded p-3 ">
-                            <div className="font-bold ">Resumen de la orden</div>
-                            <div>Items({contexto.totalItems}):     {formatter.format(contexto.totalPrice)}</div>
-                            <div>Envío:     $0.00</div>
-                            <div>Impuestos: $0.00</div>
-                            <div className="font-bold my-5 ">
-                                Total a pagar {formatter.format(contexto.totalPrice)}
-                            </div>
-                            <div className="text-white font-thin text-xs mt-1"
-                                onClick={() => setActivatedPayment(true)}>Datos de factura</div>
-                            <form onSubmit={(e) => handleProcessPayment(e)}>
-                                <label for="name" className="font-thin">Nombre:</label>
-                                <br />
-                                <input required type="text" id="name" name="name" className="border rounded"></input>
-                                <br />
-                                <label for="phone" className="font-thin">Teléfono:</label>
-                                <br />
-                                <input required type="phone" id="phone" name="phone" className="border rounded"></input>
-                                <br />
-                                <label for="email" className="font-thin">Email:</label>
-                                <br />
-                                <input required type="email" id="email" name="email" className="border rounded"></input>
-                                <br /><br />
-                                <input className="inline-block text-sm ml-4 px-4 py-2 leading-none border rounded text-black font-semibold border-black hover:border-transparent hover:text-yellow-500 hover:bg-black mt-4 lg:mt-0" type="submit" value="Pagar">
-                                </input>
-                            </form>
-                        </div>
+                        <UserPayInfo updateItemsBought={updateItemsBought} insertPaymentDb={insertPaymentDb} setActivatedPayment={setActivatedPayment}></UserPayInfo>
                     }
                 </div>
             }
